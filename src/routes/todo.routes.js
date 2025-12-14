@@ -6,7 +6,7 @@ const Todo = require("../models/Todo");
 router.get("/", async (req, res) => {
   try {
     const todos = await Todo.find();
-    res.json(todos);
+    res.json(todos); // ← PHẢI là array
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -29,5 +29,15 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// DELETE /api/todos/:id
+router.delete("/:id", async (req, res) => {
+  try {
+    await Todo.findByIdAndDelete(req.params.id);
+    res.json({ message: "Todo deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 module.exports = router;
