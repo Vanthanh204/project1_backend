@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Todo = require("../models/Todo");
 
-// GET: lấy tất cả todo
+// GET /api/todos
 router.get("/", async (req, res) => {
   try {
     const todos = await Todo.find();
@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST: thêm todo mới
+// POST /api/todos
 router.post("/", async (req, res) => {
   try {
     const { title } = req.body;
